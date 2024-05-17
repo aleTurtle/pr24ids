@@ -17,4 +17,10 @@ public class UtenteHandler {
     public List<Utente> getUtenti() {
         return (List<Utente>) this.utenteRepository.findAll();
     }
+
+    public List<Utente> addUser(Utente utente){
+        utente = new Utente();
+        this.utenteRepository.save(utente);
+        return (List<Utente>) this.utenteRepository.findAll();
+    }
 }
