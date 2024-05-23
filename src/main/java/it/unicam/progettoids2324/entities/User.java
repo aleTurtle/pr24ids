@@ -17,7 +17,7 @@ import lombok.Setter;
 public class User {
     @Id
     @GeneratedValue
-    private long id;
+    public long id;
     @Setter
     public String email;
     @Setter

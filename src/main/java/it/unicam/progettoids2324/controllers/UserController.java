@@ -1,11 +1,11 @@
 package it.unicam.progettoids2324.controllers;
 
+import it.unicam.progettoids2324.Responses.Response;
 import it.unicam.progettoids2324.Services.UserService;
 import it.unicam.progettoids2324.dtos.Requests.AddUserRequest;
 import it.unicam.progettoids2324.dtos.UserDTO;
 import it.unicam.progettoids2324.entities.User;
 import it.unicam.progettoids2324.repositories.UserRepository;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -28,21 +28,22 @@ public class UserController {
 
 
     @GetMapping("/GetUsers")
-    public Set<UserDTO> getUsers() {
+    public ResponseEntity<Response<Set<UserDTO>>> getUsers() {
         Set<UserDTO> users = new HashSet<>();
         for(User u : userRepository.findAll()) {
-            System.out.println("Email: "+ u.getEmail());
-            System.out.println("Password: "+ u.getPassword());
             users.add(u.toDTO());
         }
-        return users;
+        Response<Set<UserDTO>> response = new Response<>("User list retrived successfully", users);
+        return ResponseEntity.ok(response);
     }
 
     @PostMapping("/CreateUsers")
     public ResponseEntity<Object> addUser(@RequestBody AddUserRequest request) {
         try{
-            this.userService.CreateUser(new User(request.Email(), request.Password()));
-            return ResponseEntity.ok().body("User created");
+            User user = new User(request.Email(), request.Password());
+            this.userService.CreateUser(user);
+            Response<User> response = new Response<>("User created successfully", user);
+            return ResponseEntity.ok(response);
         }catch (IllegalArgumentException e){
             return ResponseEntity.badRequest().body(e.getMessage());
         }
