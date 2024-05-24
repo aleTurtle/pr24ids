@@ -2,7 +2,7 @@ package it.unicam.progettoids2324.Services;
 
 import it.unicam.progettoids2324.Services.Abstractions.UserServiceInterface;
 import it.unicam.progettoids2324.entities.User;
-import it.unicam.progettoids2324.repositories.UserRepository;
+import it.unicam.progettoids2324.Repositories.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
@@ -22,7 +22,7 @@ public class UserService implements UserServiceInterface {
         if(this.userRepository.findByEmail(user.getEmail()) != null){
             throw new IllegalArgumentException("Email already exists");
         }
-        User u = this.userRepository.save(new User(user.getEmail(), user.getPassword()));
+        this.userRepository.save(new User(user.getEmail(), user.getPassword()));
     }
 
     @Override
@@ -35,13 +35,13 @@ public class UserService implements UserServiceInterface {
     }
 
     @Override
-    public User getUser(long id) {
+    public User getUserById(long id) {
         return this.userRepository.findById(id).orElseThrow();
     }
 
     @Override
     public void deleteUser(long id){
-        this.userRepository.delete(getUser(id));
+        this.userRepository.delete(getUserById(id));
     }
 
 

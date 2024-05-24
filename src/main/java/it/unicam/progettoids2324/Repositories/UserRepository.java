@@ -1,4 +1,4 @@
-package it.unicam.progettoids2324.repositories;
+package it.unicam.progettoids2324.Repositories;
 
 import it.unicam.progettoids2324.entities.User;
 import org.springframework.data.jpa.repository.Query;

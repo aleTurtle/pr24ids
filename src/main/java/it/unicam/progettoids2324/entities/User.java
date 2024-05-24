@@ -24,10 +24,13 @@ public class User {
     @Setter
     private String password;
 
+
+
     public User(long id, String email, String password) {
         this.id = id;
         this.email = email;
         this.password = password;
+
 
     }
 

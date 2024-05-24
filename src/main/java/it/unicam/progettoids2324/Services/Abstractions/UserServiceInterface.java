@@ -24,7 +24,7 @@ public interface UserServiceInterface {
      * @return user from the Id
      * @throws IllegalArgumentException if the user doesn't exist
      */
-    User getUser(long id);
+    User getUserById(long id);
 
     /**
      * Delete the user in the repository by the Id

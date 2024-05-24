@@ -1,17 +1,12 @@
 package it.unicam.progettoids2324.controllers;
 
-import it.unicam.progettoids2324.Responses.Response;
 import it.unicam.progettoids2324.Services.UserService;
 import it.unicam.progettoids2324.dtos.Requests.AddUserRequest;
-import it.unicam.progettoids2324.dtos.UserDTO;
 import it.unicam.progettoids2324.entities.User;
-import it.unicam.progettoids2324.repositories.UserRepository;
+import it.unicam.progettoids2324.Repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.HashSet;
-import java.util.Set;
 
 
 @RestController
@@ -27,12 +22,10 @@ public class UserController {
     }
 
     @PostMapping("/CreateUsers")
-    public ResponseEntity<Object> addUser(@RequestBody AddUserRequest request) {
+    public ResponseEntity<Object> createUser(@RequestBody AddUserRequest request) {
         try{
-            User user = new User(request.Email(), request.Password());
-            this.userService.createUser(user);
-            Response<User> response = new Response<>("User created successfully", user);
-            return ResponseEntity.ok(response);
+            this.userService.createUser(new User(request.Email(), request.Password()));
+            return ResponseEntity.ok().body("User created");
         }catch (IllegalArgumentException e){
             return ResponseEntity.badRequest().body(e.getMessage());
         }
@@ -45,7 +38,7 @@ public class UserController {
 
     @GetMapping("/GetUserById/{userId}")
     public ResponseEntity<User> getUserById(@PathVariable long userId){
-        return ResponseEntity.ok().body(userService.getUser(userId));
+        return ResponseEntity.ok().body(userService.getUserById(userId));
 
     }
 
