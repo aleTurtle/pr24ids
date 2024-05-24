@@ -18,7 +18,7 @@ public class UserService implements UserServiceInterface {
     }
 
     @Override
-    public void addUser(User user) {
+    public void createUser(User user) {
         if(this.userRepository.findByEmail(user.getEmail()) != null){
             throw new IllegalArgumentException("Email already exists");
         }
@@ -35,10 +35,14 @@ public class UserService implements UserServiceInterface {
     }
 
     @Override
-    public void CreateUser(User user){
-        if(this.userRepository.findByEmail(user.getEmail()) != null){
-            throw new IllegalArgumentException("Email already exists");
-        }
-        User u = this.userRepository.save(new User(user.getEmail(), user.getPassword()));
+    public User getUser(long id) {
+        return this.userRepository.findById(id).orElseThrow();
     }
+
+    @Override
+    public void deleteUser(long id){
+        this.userRepository.delete(getUser(id));
+    }
+
+
 }

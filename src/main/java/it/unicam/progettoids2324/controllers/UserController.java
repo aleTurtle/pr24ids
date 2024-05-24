@@ -26,26 +26,32 @@ public class UserController {
         this.userRepository = userRepository;
     }
 
-
-    @GetMapping("/GetUsers")
-    public ResponseEntity<Response<Set<UserDTO>>> getUsers() {
-        Set<UserDTO> users = new HashSet<>();
-        for(User u : userRepository.findAll()) {
-            users.add(u.toDTO());
-        }
-        Response<Set<UserDTO>> response = new Response<>("User list retrived successfully", users);
-        return ResponseEntity.ok(response);
-    }
-
     @PostMapping("/CreateUsers")
     public ResponseEntity<Object> addUser(@RequestBody AddUserRequest request) {
         try{
             User user = new User(request.Email(), request.Password());
-            this.userService.CreateUser(user);
+            this.userService.createUser(user);
             Response<User> response = new Response<>("User created successfully", user);
             return ResponseEntity.ok(response);
         }catch (IllegalArgumentException e){
             return ResponseEntity.badRequest().body(e.getMessage());
         }
+    }
+
+    @GetMapping("/GetUsers")
+    public ResponseEntity<Object> getUsers() {
+        return ResponseEntity.ok().body(this.userService.getUsers());
+    }
+
+    @GetMapping("/GetUserById/{userId}")
+    public ResponseEntity<User> getUserById(@PathVariable long userId){
+        return ResponseEntity.ok().body(userService.getUser(userId));
+
+    }
+
+    @DeleteMapping("/DeleteUser/{userId}")
+    public ResponseEntity<Object> deleteUser(@PathVariable long userId){
+        this.userService.deleteUser(userId);
+        return ResponseEntity.ok().body("User deleted");
     }
 }
