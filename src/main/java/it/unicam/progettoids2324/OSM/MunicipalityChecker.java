@@ -1,4 +1,4 @@
-package it.unicam.progettoids2324.entities;
+package it.unicam.progettoids2324.OSM;
 
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -15,11 +15,11 @@ import org.locationtech.jts.io.geojson.GeoJsonReader;
 import java.io.IOException;
 
 public class MunicipalityChecker {
-    private final Coordinates coordinates;
+    private final it.unicam.progettoids2324.entities.Coordinates coordinates;
     private final String comune;
     private Geometry boundary;
 
-    public MunicipalityChecker(Coordinates coordinates, String comune) {
+    public MunicipalityChecker(it.unicam.progettoids2324.entities.Coordinates coordinates, String comune) {
         this.coordinates = coordinates;
         this.comune = comune;
         this.fetchBoundary();
@@ -58,7 +58,7 @@ public class MunicipalityChecker {
     }
 
     public static void main(String[] args) {
-        Coordinates coordinates = new Coordinates(43.7228, 10.4017); // Esempio: Pisa
+        it.unicam.progettoids2324.entities.Coordinates coordinates = new it.unicam.progettoids2324.entities.Coordinates(43.7228, 10.4017); // Example: Pisa
         MunicipalityChecker checker = new MunicipalityChecker(coordinates, "Roma");
 
         if (checker.isPointInComune()) {

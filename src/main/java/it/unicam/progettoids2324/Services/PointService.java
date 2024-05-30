@@ -5,7 +5,7 @@ import it.unicam.progettoids2324.Services.Abstractions.OsmServiceInterface;
 import it.unicam.progettoids2324.Services.Abstractions.PointServiceInterface;
 import it.unicam.progettoids2324.entities.Coordinates;
 import it.unicam.progettoids2324.entities.Municipality;
-import it.unicam.progettoids2324.entities.MunicipalityChecker;
+import it.unicam.progettoids2324.OSM.MunicipalityChecker;
 import it.unicam.progettoids2324.entities.Point;
 import org.locationtech.jts.algorithm.HCoordinate;
 import org.locationtech.jts.util.CoordinateArrayFilter;

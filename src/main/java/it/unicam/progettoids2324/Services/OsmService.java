@@ -3,7 +3,7 @@ package it.unicam.progettoids2324.Services;
 import it.unicam.progettoids2324.Services.Abstractions.OsmServiceInterface;
 import it.unicam.progettoids2324.entities.Coordinates;
 import it.unicam.progettoids2324.entities.Municipality;
-import it.unicam.progettoids2324.entities.MunicipalityChecker;
+import it.unicam.progettoids2324.OSM.MunicipalityChecker;
 import org.springframework.stereotype.Service;
 
 @Service
