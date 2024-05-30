@@ -1,5 +1,7 @@
 package it.unicam.progettoids2324.OSM;
 
+import it.unicam.progettoids2324.entities.Coordinates;
+import it.unicam.progettoids2324.entities.MunicipalityChecker;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -39,5 +41,11 @@ public class GetCoord {
         }
 
         return null;
+    }
+
+    public static void main(String[] args) throws Exception {
+        double[] coor = getCoordinates("Firenze");
+        System.out.print(coor[0] + " ");
+        System.out.print(coor[1]);
     }
 }
