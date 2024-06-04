@@ -1,11 +1,10 @@
 package it.unicam.progettoids2324.entities;
 
-import it.unicam.progettoids2324.Repositories.ContestRepository;
 import it.unicam.progettoids2324.dtos.MunicipalityDTO;
+import it.unicam.progettoids2324.entities.Point.Point;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.util.Set;
 

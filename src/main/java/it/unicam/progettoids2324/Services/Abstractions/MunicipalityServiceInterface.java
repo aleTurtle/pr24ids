@@ -24,7 +24,7 @@ public interface MunicipalityServiceInterface {
      * Return all the municipalities
      * @return all the municipalities with their details
      */
-    Set<Municipality> getMunicipalities();
+    //Set<Municipality> getMunicipalities();
 
     /**
      * Find a municipality by the id

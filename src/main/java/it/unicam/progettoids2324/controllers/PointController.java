@@ -1,35 +1,47 @@
 package it.unicam.progettoids2324.controllers;
 
-import it.unicam.progettoids2324.Repositories.PointRepository;
-import it.unicam.progettoids2324.Services.OsmService;
+import it.unicam.progettoids2324.dtos.Requests.CreatePointEventoRequest;
+import it.unicam.progettoids2324.dtos.Requests.CreatePointLuogoRequest;
+
 import it.unicam.progettoids2324.Services.PointService;
-import it.unicam.progettoids2324.dtos.Requests.CreatePoiRequest;
-import it.unicam.progettoids2324.entities.Point;
+
+import it.unicam.progettoids2324.entities.Point.PointType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 
 @RestController
 @RequestMapping("/PointController")
 public class PointController {
     private final PointService pointService;
-    private final PointRepository pointRepository;
-    private final OsmService osmService;
 
     @Autowired
-    public PointController(PointService pointService, PointRepository pointRepository, OsmService osmService) {
+    public PointController(PointService pointService) {
         this.pointService = pointService;
-        this.pointRepository = pointRepository;
-        this.osmService = osmService;
     }
 
-    @PostMapping("/CreatePOI")
-    public ResponseEntity<Object> addPoi(@RequestBody CreatePoiRequest request){
-        this.pointService.addPoi(request.coord(), request.municipality());
-        return ResponseEntity.ok().body("Point Created");
+    @PostMapping("/CreatePointLuogo")
+    public ResponseEntity<Object> addPointLuogo(@RequestBody CreatePointLuogoRequest request){
+        try {
+            this.pointService.addPoi(PointType.Luogo, request.name(), request.coord(), request.emergenza(), null,
+                    null);
+            return ResponseEntity.ok().body("Point Created");
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e);
+        }
     }
+
+    @PostMapping("/CreatePointEvento")
+    public ResponseEntity<Object> addPointEvento(@RequestBody CreatePointEventoRequest request){
+        try {
+            this.pointService.addPoi(PointType.Evento, request.name(), request.coordinates(), null,
+                    request.start(), request.end());
+            return ResponseEntity.ok().body("Point Created");
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e);
+        }
+    }
+
 
 }

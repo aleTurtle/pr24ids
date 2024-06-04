@@ -32,7 +32,7 @@ public class MunicipalityService implements MunicipalityServiceInterface{
         this.municipalityRepository.delete(this.getMunicipalityById(id));
     }
 
-    @Override
+   // @Override
     public Set<Municipality> getMunicipalities() {
         Set<Municipality> muni = new HashSet<>();
         for(Municipality m : this.municipalityRepository.findAll()){
