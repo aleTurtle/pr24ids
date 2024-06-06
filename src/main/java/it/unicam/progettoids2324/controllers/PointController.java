@@ -24,7 +24,7 @@ public class PointController {
     @PostMapping("/CreatePointLuogo")
     public ResponseEntity<Object> addPointLuogo(@RequestBody CreatePointLuogoRequest request){
         try {
-            this.pointService.addPoi(PointType.Luogo, request.name(), request.coord(), request.emergenza(), null,
+            this.pointService.addPoi(PointType.Luogo, request.name(), request.coord(), request.luogoDescrizione(), null,
                     null);
             return ResponseEntity.ok().body("Point Created");
         } catch (Exception e) {
@@ -43,5 +43,18 @@ public class PointController {
         }
     }
 
+    @GetMapping("/GetEventoPoints")
+    public ResponseEntity<Object> getEventoPoints() {
+        return ResponseEntity.ok().body(this.pointService.getEventoPoints());
+    }
 
-}
+    @GetMapping("/GetluogoPoints")
+    public ResponseEntity<Object> getLuogoPoints() {
+        return ResponseEntity.ok().body(this.pointService.getLuogoPoints());
+    }
+
+
+
+
+
+    }

@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 public record CreatePointLuogoRequest(
         String name,
         Coordinates coord,
-        String emergenza
+        String luogoDescrizione
 ) {
 
 }
