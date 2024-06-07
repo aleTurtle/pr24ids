@@ -6,11 +6,7 @@ import java.util.Set;
 
 public interface UserServiceInterface {
 
-    /** Add a user to the repository
-     * @param user the user to add
-     * @throws IllegalArgumentException if the user is alredy in the repository
-     */
-    void createUser(User user);
+    void createUser(String email, String password);
 
     /**
      * Return the details of all user in the repository

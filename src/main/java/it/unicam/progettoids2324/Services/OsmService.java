@@ -10,9 +10,8 @@ import org.springframework.stereotype.Service;
 public class OsmService implements OsmServiceInterface {
 
     @Override
-    public boolean isInTheMunicipality(Coordinates coor, Municipality municipality) {
-        String name = municipality.getName();
-        MunicipalityChecker check = new MunicipalityChecker(coor, name);
+    public boolean isInTheMunicipality(Coordinates coor, String municipalityName) {
+        MunicipalityChecker check = new MunicipalityChecker(coor, municipalityName);
         if(check == null){
             throw new IllegalArgumentException("The point isn't in the municipality");
         }

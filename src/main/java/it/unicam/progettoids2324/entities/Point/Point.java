@@ -1,5 +1,7 @@
 package it.unicam.progettoids2324.entities.Point;
 
+import it.unicam.progettoids2324.dtos.PointDTO;
+import it.unicam.progettoids2324.dtos.PointEventoDTO;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,18 +19,16 @@ public abstract class Point {
     private long id;
     @Embedded
     private Coordinates position;
-
     private String name;
     private PointType type;
-
+    private PointState pointState;
     public Point(String name, Coordinates position, PointType type) {
         this.name= name;
         this.position = position;
         this.type= type;
     }
 
-
-
+    public PointDTO toDTO() {return new PointDTO(id,name,position);}
 
 }
 

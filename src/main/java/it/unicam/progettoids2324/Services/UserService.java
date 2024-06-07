@@ -1,8 +1,11 @@
 package it.unicam.progettoids2324.Services;
 
 import it.unicam.progettoids2324.Services.Abstractions.UserServiceInterface;
+import it.unicam.progettoids2324.entities.Point.Point;
 import it.unicam.progettoids2324.entities.User;
 import it.unicam.progettoids2324.Repositories.UserRepository;
+import it.unicam.progettoids2324.entities.UserRole;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
@@ -12,17 +15,17 @@ import java.util.Set;
 public class UserService implements UserServiceInterface {
     private final UserRepository userRepository;
 
-
+    @Autowired
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
     @Override
-    public void createUser(User user) {
-        if(this.userRepository.findByEmail(user.getEmail()) != null){
+    public void createUser(String email, String password) {
+        if(this.userRepository.findByEmail(email) != null){
             throw new IllegalArgumentException("Email already exists");
         }
-        this.userRepository.save(new User(user.getEmail(), user.getPassword()));
+        this.userRepository.save(new User(email, password));
     }
 
     @Override
@@ -43,6 +46,18 @@ public class UserService implements UserServiceInterface {
     public void deleteUser(long id){
         this.userRepository.delete(getUserById(id));
     }
+
+    public void updateRole(long userId, long toUpdateUserId, UserRole role) {
+        if (this.getUserById(userId).getRole() != UserRole.MANAGER) {
+            throw new IllegalArgumentException("Utente non autorizzato");
+        }
+        User u = this.getUserById(toUpdateUserId);
+        u.setRole(role);
+        this.userRepository.save(u);
+    }
+
+
+
 
 
 }

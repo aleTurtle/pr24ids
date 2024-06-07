@@ -15,9 +15,9 @@ public class Contest {
     private int id;
     private String name; // nome del contest
     private String description;
-    @Column(name = "start")// descrizione
+    @Column(name = "start_date")// descrizione
     private LocalDateTime start; // data di inizio
-    @Column(name = "end")
+    @Column(name = "end_date")
     private LocalDateTime end; // data di fine
     @Setter
     @OneToOne
@@ -32,7 +32,6 @@ public class Contest {
        // this.contributions = new HashSet<>();
         this.start = start;
         this.end = end;
-        this.win = win;
         this.state = ContestState.CREATED;
     }
 }

@@ -1,7 +1,5 @@
 package it.unicam.progettoids2324.OSM;
 
-import it.unicam.progettoids2324.entities.Coordinates;
-import it.unicam.progettoids2324.OSM.MunicipalityChecker;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;

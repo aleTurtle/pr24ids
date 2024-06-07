@@ -6,9 +6,11 @@ import it.unicam.progettoids2324.entities.Municipality;
 import java.time.LocalDateTime;
 
 public record CreatePointLuogoRequest(
+        Long Userid,
+
         String name,
         Coordinates coord,
         String luogoDescrizione
-) {
+) {}
 
-}
+

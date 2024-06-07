@@ -29,7 +29,7 @@ public class ContestService implements ContestServiceInterface {
             throw new IllegalArgumentException("The municipality cannot be null");
         }
         Set<Contest> contests = new HashSet<>();
-        for(Contest c : municipality.getContests()){
+        for(Contest c : this.contestRepository.findAll()){
             contests.add(c);
         }
         return contests;
@@ -38,7 +38,6 @@ public class ContestService implements ContestServiceInterface {
     @Override
     public void createContest(String name, String description, LocalDateTime start, LocalDateTime end, String win, Municipality municipality) {
         Contest contest = new Contest(name, description, start, end);
-        municipality.addContest(contest);
         this.contestRepository.save(contest);
     }
 

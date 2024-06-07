@@ -9,8 +9,8 @@ public interface OsmServiceInterface {
     /**
      *
      * @param coor
-     * @param municipality
+     * @param municipalityName
      * @return TRUE if the point is in the municipality else return false
      */
-    boolean isInTheMunicipality(Coordinates coor, Municipality municipality);
+    boolean isInTheMunicipality(Coordinates coor, String municipalityName);
 }

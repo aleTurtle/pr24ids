@@ -1,5 +1,6 @@
 package it.unicam.progettoids2324.OSM;
 
+import it.unicam.progettoids2324.entities.Coordinates;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -17,11 +18,11 @@ import org.locationtech.jts.io.geojson.GeoJsonReader;
 import java.io.IOException;
 
 public class MunicipalityChecker {
-    private final it.unicam.progettoids2324.entities.Coordinates coordinates;
+    private final Coordinates coordinates;
     private final String comune;
     private Geometry boundary;
 
-    public MunicipalityChecker(it.unicam.progettoids2324.entities.Coordinates coordinates, String comune) {
+    public MunicipalityChecker(Coordinates coordinates, String comune) {
         this.coordinates = coordinates;
         this.comune = comune;
         this.fetchBoundary();

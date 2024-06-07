@@ -1,15 +1,20 @@
 package it.unicam.progettoids2324.entities.Point;
 
+import it.unicam.progettoids2324.dtos.PointDTO;
 import it.unicam.progettoids2324.dtos.PointEventoDTO;
 import it.unicam.progettoids2324.entities.Coordinates;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 
-@NoArgsConstructor
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
 public class PointEvento extends Point {
 
     private LocalDateTime start;
@@ -22,6 +27,6 @@ public class PointEvento extends Point {
         this.end= end;
     }
 
-    public PointEventoDTO toDTO() {return new PointEventoDTO(super.getId(),super.getName(),super.getPosition(), start,  end);}
+    public PointDTO toDTO() {return new PointEventoDTO(super.getId(),super.getName(),super.getPosition(), start,  end);}
 
 }
