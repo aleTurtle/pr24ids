@@ -22,7 +22,7 @@ public class Contest {
     @Setter
     @OneToOne
     private User win; // premio
-
+    @Setter
     private ContestState state; // stato associato al Contest
 
 
