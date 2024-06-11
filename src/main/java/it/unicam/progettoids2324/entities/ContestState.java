@@ -6,5 +6,3 @@ public enum ContestState {
     OPEN,
     CLOSED;
 }
-
-

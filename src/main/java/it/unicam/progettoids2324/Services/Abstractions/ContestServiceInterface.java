@@ -8,32 +8,18 @@ import java.util.Set;
 
 public interface ContestServiceInterface {
 
-    /**
-     * Return the contest by the id
-     * @param contestId
-     * @return Contest with the id
-     */
     Contest getContestById(long contestId);
 
-    Set<Contest> getContests(Municipality municipality);
+    Set<Contest> getContests(long userId);
 
-    /**
-     * Create a contest
-     * @param name
-     * @param description
-     * @param start
-     * @param end
-     * @param win
-     * @throws IllegalArgumentException
-     */
-    void createContest(String name, String description, LocalDateTime start, LocalDateTime end, String win, Municipality municipality);
+    void createContest(long userId, String name, String description, LocalDateTime start, LocalDateTime end, String win);
 
-    /**
-     * Set the winner from the id
-     * @param contestId
-     * @param userId
-     */
+
     void setWinner(long contestId, long userId);
 
+    void openContest(long userId, long contestId);
+
+    void closeContest(long userId, long contestId);
+    //  Set<ContentDTO> getContestContributions(long userId, long contestId);
 
 }
