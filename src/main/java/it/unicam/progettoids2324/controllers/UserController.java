@@ -37,7 +37,6 @@ public class UserController {
     @GetMapping("/GetUserById/{userId}")
     public ResponseEntity<User> getUserById(@PathVariable long userId){
         return ResponseEntity.ok().body(userService.getUserById(userId));
-
     }
 
     @DeleteMapping("/DeleteUser/{userId}")
@@ -46,13 +45,5 @@ public class UserController {
         return ResponseEntity.ok().body("User deleted");
     }
 
-    @PutMapping("/UpdateRole/{userId}")
-    public ResponseEntity<Object> updateRole(@PathVariable long userId, @RequestBody UpdateUserRole request) {
-        try {
-            this.userService.updateRole(userId, request.userId(), UserRole.valueOf(request.role()));
-        } catch (Exception e) {
-            ResponseEntity.badRequest().body(e.getMessage());
-        }
-        return ResponseEntity.ok().body("User role updated");
-    }
+
 }

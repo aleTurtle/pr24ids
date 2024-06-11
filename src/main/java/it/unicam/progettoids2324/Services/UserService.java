@@ -47,14 +47,7 @@ public class UserService implements UserServiceInterface {
         this.userRepository.delete(getUserById(id));
     }
 
-    public void updateRole(long userId, long toUpdateUserId, UserRole role) {
-        if (this.getUserById(userId).getRole() != UserRole.MANAGER) {
-            throw new IllegalArgumentException("Utente non autorizzato");
-        }
-        User u = this.getUserById(toUpdateUserId);
-        u.setRole(role);
-        this.userRepository.save(u);
-    }
+
 
 
 

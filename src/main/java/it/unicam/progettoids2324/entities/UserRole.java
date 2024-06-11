@@ -6,5 +6,15 @@ public enum  UserRole {
     AUTHORIZED_CONTRIBUTOR,
     CURATOR,
     ANIMATOR,
-    MANAGER
+    MANAGER;
+
+    public UserRole fromString(String role) {
+        return switch (role.toUpperCase()) {
+            case "CONTRIBUTOR" -> CONTRIBUTOR;
+            case "AUTHORIZED_CONTRIBUTOR" -> AUTHORIZED_CONTRIBUTOR;
+            case "CURATOR" -> CURATOR;
+            case "ANIMATOR" -> ANIMATOR;
+            default -> throw new IllegalArgumentException("Invalid role: " + role);
+        };
+    }
 }
