@@ -21,11 +21,9 @@ public class PointService implements PointServiceInterface {
     private final UserService userService;
     private final PointRepository pointRepository;
 
-    private final OsmService osmService;
 
-    public PointService(PointRepository pointRepository,  OsmService osmService, UserService userService) {
+    public PointService(PointRepository pointRepository, UserService userService) {
         this.pointRepository = pointRepository;
-        this.osmService = osmService;
         this.userService = userService;
     }
 

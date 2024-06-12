@@ -8,4 +8,7 @@ import org.springframework.data.repository.CrudRepository;
 public interface ManagerRepository extends CrudRepository<Manager, Long> {
     @Query("SELECT u FROM Manager u WHERE u.email = ?1")
     Manager findByEmail(String email);
+
+    @Query("SELECT u FROM Manager u WHERE u.id = ?1")
+    Manager findById(long id);
 }

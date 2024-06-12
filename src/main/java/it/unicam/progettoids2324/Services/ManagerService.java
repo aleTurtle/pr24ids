@@ -44,6 +44,11 @@ public class ManagerService implements ManagerServiceInterface {
         return managers;
     }
 
+    @Override
+    public Manager getManagerById(long id) {
+        return this.managerRepository.findById(id);
+    }
+
     public void updateRole(long managerId, long toUpdateUserId, UserRole role) {
         User u = this.userService.getUserById(toUpdateUserId);
         u.setRole(role);

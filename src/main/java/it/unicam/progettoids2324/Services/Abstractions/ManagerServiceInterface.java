@@ -9,4 +9,6 @@ public interface ManagerServiceInterface {
     void createManager(String email, String password);
 
     Set<Manager> getManagers();
+
+    Manager getManagerById(long id);
 }
