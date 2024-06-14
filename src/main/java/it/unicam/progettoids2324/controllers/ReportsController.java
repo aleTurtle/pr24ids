@@ -1,10 +1,8 @@
 package it.unicam.progettoids2324.controllers;
 
 import it.unicam.progettoids2324.Repositories.ReportRepository;
-import it.unicam.progettoids2324.Services.ManagerService;
 import it.unicam.progettoids2324.Services.ReportsService;
 import it.unicam.progettoids2324.dtos.Requests.AddReportsRequest;
-import it.unicam.progettoids2324.entities.Manager;
 import it.unicam.progettoids2324.entities.Reports;
 import it.unicam.progettoids2324.entities.UserRole;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,12 +14,10 @@ import org.springframework.web.bind.annotation.*;
 public class ReportsController {
     private final ReportRepository reportRepository;
     private final ReportsService reportsService;
-    private final ManagerService managerService;
 
     @Autowired
-    public ReportsController(ReportRepository reportRepository, ReportsService reportsService, ManagerService managerService) {
+    public ReportsController(ReportRepository reportRepository, ReportsService reportsService) {
         this.reportRepository = reportRepository;
-        this.managerService = managerService;
         this.reportsService = reportsService;
     }
 
@@ -31,7 +27,7 @@ public class ReportsController {
         this.reportRepository.save(report);
         return ResponseEntity.ok().body(report);
     }
-
+/*
     @GetMapping("/GetReports/{managerId}")
     public ResponseEntity<Object> getReports(@PathVariable long managerId){
         if(this.managerService.getManagerById(managerId).getRole() != UserRole.MANAGER){
@@ -57,5 +53,5 @@ public class ReportsController {
         reportsService.deleteReport(reportsId);
         return ResponseEntity.ok().body("Report eliminato con successo");
     }
-
+*/
 }

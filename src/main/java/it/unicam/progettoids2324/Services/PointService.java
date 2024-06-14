@@ -27,6 +27,10 @@ public class PointService implements PointServiceInterface {
         this.userService = userService;
     }
 
+    public Point getPointById(long id) {
+        return this.pointRepository.findById(id).orElseThrow();
+    }
+
     @Override
     public Set<PointDTO> getEventoPoints() {
         Set<PointDTO> points = new HashSet<>();
@@ -67,6 +71,26 @@ public class PointService implements PointServiceInterface {
         return points;
     }
 
+    public Set<PointDTO> getApprovedPoints() {
+        Set<PointDTO> points = new HashSet<>();
+        for (Point p : this.pointRepository.findAll()) {
+            if (p.getPointState() == PointState.APPROVED) {
+                points.add(p.toDTO());
+            }
+        }
+        return points;
+    }
+
+    public Set<PointDTO> getNotApprovedPoints() {
+        Set<PointDTO> points = new HashSet<>();
+        for (Point p : this.pointRepository.findAll()) {
+            if (p.getPointState() == PointState.NOTAPPROVED) {
+                points.add(p.toDTO());
+            }
+        }
+        return points;
+    }
+
     public void addPoi(Long userId, PointType type, String name, Coordinates coordinate, String descrizioneLuogo, LocalDateTime start,
                        LocalDateTime end) {
         /*
@@ -87,17 +111,19 @@ public class PointService implements PointServiceInterface {
             UserRole role = this.userService.getUserById(userId).getRole();
             if (role == UserRole.CONTRIBUTOR) {
                 p.setPointState(PointState.PENDING);
-            } else {
+
+            } else if(role == UserRole.AUTHORIZED_CONTRIBUTOR) {
                 p.setPointState(PointState.APPROVED);
             }
             this.pointRepository.save(p);
         }
     }
 
-    public void approvePoint(long userId, Point p) {
+    public void approvePoint(long userId, long pointId) {
         if (this.userService.getUserById(userId).getRole() != UserRole.CURATOR) {
-            throw new IllegalArgumentException("Utente non autorizzato");
+            throw new IllegalArgumentException("User not authorized to approve points");
         }
+        Point p = this.getPointById(pointId);
         p.setPointState(PointState.APPROVED);
         this.pointRepository.save(p);
     }

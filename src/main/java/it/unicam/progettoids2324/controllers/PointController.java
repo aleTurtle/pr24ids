@@ -1,6 +1,6 @@
 package it.unicam.progettoids2324.controllers;
 
-import it.unicam.progettoids2324.dtos.Requests.ApprovePoint;
+import it.unicam.progettoids2324.dtos.Requests.ApprovePointRequest;
 import it.unicam.progettoids2324.dtos.Requests.CreatePointEventoRequest;
 import it.unicam.progettoids2324.dtos.Requests.CreatePointLuogoRequest;
 
@@ -8,7 +8,7 @@ import it.unicam.progettoids2324.Services.PointService;
 import it.unicam.progettoids2324.Services.UserService;
 
 
-import it.unicam.progettoids2324.dtos.Requests.UpdateUserRole;
+import it.unicam.progettoids2324.dtos.Requests.UpdateUserRoleRequest;
 import it.unicam.progettoids2324.entities.Point.PointType;
 import it.unicam.progettoids2324.entities.UserRole;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,14 +70,24 @@ public class PointController {
         return ResponseEntity.ok().body(this.pointService.getPendingPoints());
     }
 
-    @PutMapping("/ApprovePoint/{userId}")
-    public ResponseEntity<Object> approvePoint(@PathVariable long userId, @RequestBody ApprovePoint request) {
-        try {
-            this.pointService.approvePoint(userId, request.p());
-        } catch (Exception e) {
-            ResponseEntity.badRequest().body(e.getMessage());
-        }
-        return ResponseEntity.ok().body("Point approved");
+    @GetMapping("/GetApprovedPoints")
+    public ResponseEntity<Object> getApprovedPoints() {
+        return ResponseEntity.ok().body(this.pointService.getApprovedPoints());
     }
 
+    @GetMapping("/GetNotApprovedPoints")
+    public ResponseEntity<Object> getNotApprovedPoints() {
+        return ResponseEntity.ok().body(this.pointService.getNotApprovedPoints());
     }
+
+    @PutMapping("/ApprovePoint/{userId}")
+    public ResponseEntity<Object> approvePoint(@PathVariable long userId, @RequestBody ApprovePointRequest request) {
+        try {
+            this.pointService.approvePoint(userId, request.pointId());
+            return ResponseEntity.ok().body("Point approved");
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+}

@@ -16,6 +16,7 @@ import it.unicam.progettoids2324.entities.Coordinates;
 public abstract class Point {
     @Id
     @GeneratedValue
+    @Getter
     private long id;
     @Embedded
     private Coordinates position;

@@ -81,7 +81,7 @@ public class ContentController {
 
 
 
-    @DeleteMapping("/deleteContribution/{contributionId}")
+    @DeleteMapping("/deleteContent/{contentId}")
     public ResponseEntity<Object> deleteContent(@PathVariable long contentId) {
         try {
             this.contentService.deleteContent(contentId);

@@ -20,4 +20,10 @@ public interface PointServiceInterface {
     Set<PointDTO> getPoints();
 
     Set<PointDTO> getPendingPoints();
+
+    void approvePoint(long userId, long pointId);
+
+    Set<PointDTO> getApprovedPoints();
+
+    Set<PointDTO> getNotApprovedPoints();
 }

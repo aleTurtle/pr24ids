@@ -48,6 +48,18 @@ public class UserService implements UserServiceInterface {
     }
 
 
+    public void updateRole(long userId, long toUpdateUserId, String role) {
+        if (this.getUserById(userId).getRole() != UserRole.MANAGER) {
+            throw new IllegalArgumentException("User not authorized to change roles");
+        }
+        User u = this.getUserById(toUpdateUserId);
+
+        u.setRole(this.getUserById(userId).getRole().fromString(role));
+
+        this.userRepository.save(u);
+    }
+
+
 
 
 

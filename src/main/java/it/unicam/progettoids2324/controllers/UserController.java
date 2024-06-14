@@ -2,7 +2,7 @@ package it.unicam.progettoids2324.controllers;
 
 import it.unicam.progettoids2324.Services.UserService;
 import it.unicam.progettoids2324.dtos.Requests.AddUserRequest;
-import it.unicam.progettoids2324.dtos.Requests.UpdateUserRole;
+import it.unicam.progettoids2324.dtos.Requests.UpdateUserRoleRequest;
 import it.unicam.progettoids2324.entities.User;
 import it.unicam.progettoids2324.entities.UserRole;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,5 +45,15 @@ public class UserController {
         return ResponseEntity.ok().body("User deleted");
     }
 
+
+    @PutMapping("/UpdateRole/{userId}")
+    public ResponseEntity<Object> updateRole(@PathVariable long userId, @RequestBody UpdateUserRoleRequest request) {
+        try {
+            this.userService.updateRole(userId, request.toUpdateUserId(), request.role());
+            return ResponseEntity.ok().body("User role updated");
+        } catch (Exception e) {
+        return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
 
 }

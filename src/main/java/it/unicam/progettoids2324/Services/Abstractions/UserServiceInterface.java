@@ -27,4 +27,6 @@ public interface UserServiceInterface {
      * @param id
      */
     void deleteUser(long id);
+
+    void updateRole(long userId, long toUpdateUserId, String role);
 }
