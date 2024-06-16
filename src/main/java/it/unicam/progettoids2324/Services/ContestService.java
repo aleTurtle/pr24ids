@@ -4,6 +4,7 @@ import it.unicam.progettoids2324.Repositories.ContestRepository;
 import it.unicam.progettoids2324.Services.Abstractions.ContestServiceInterface;
 import it.unicam.progettoids2324.entities.Contest;
 import it.unicam.progettoids2324.entities.ContestState;
+import it.unicam.progettoids2324.entities.User;
 import it.unicam.progettoids2324.entities.UserRole;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +15,7 @@ import java.util.Set;
 
 @Service
 public class ContestService implements ContestServiceInterface {
+    //@Autowired
     private final ContestRepository contestRepository;
     private final UserService userService;
     private UserService Userservice;
@@ -42,7 +44,7 @@ public class ContestService implements ContestServiceInterface {
     }
 
     @Override
-    public void createContest(long userId, String name, String description, LocalDateTime start, LocalDateTime end, String win) {
+    public void createContest(long userId, String name, String description, LocalDateTime start, LocalDateTime end, long winnerId) {
 
         if (this.Userservice.getUserById(userId).getRole() != UserRole.ANIMATOR) {
             throw new IllegalArgumentException("User not authorized to create a contest");

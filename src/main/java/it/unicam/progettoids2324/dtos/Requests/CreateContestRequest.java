@@ -1,5 +1,7 @@
 package it.unicam.progettoids2324.dtos.Requests;
 
+import it.unicam.progettoids2324.entities.User;
+
 import java.time.LocalDateTime;
 public record CreateContestRequest(
         long userId,
@@ -7,5 +9,5 @@ public record CreateContestRequest(
         String description,
         LocalDateTime start,
         LocalDateTime end,
-        String win
+        long winnerId
 ) {}

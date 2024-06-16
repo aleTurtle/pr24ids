@@ -3,7 +3,7 @@ package it.unicam.progettoids2324.controllers;
 import it.unicam.progettoids2324.Repositories.ReportRepository;
 import it.unicam.progettoids2324.Services.ReportsService;
 import it.unicam.progettoids2324.dtos.Requests.AddReportsRequest;
-import it.unicam.progettoids2324.entities.Reports;
+import it.unicam.progettoids2324.entities.Report;
 import it.unicam.progettoids2324.entities.UserRole;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -22,36 +22,35 @@ public class ReportsController {
     }
 
     @PostMapping("/CreateReports/")
-    public ResponseEntity<Reports> createReports(@RequestBody AddReportsRequest request) {
-        Reports report = new Reports(request.description());
+    public ResponseEntity<Report> createReports(@RequestBody AddReportsRequest request) {
+        Report report = new Report(request.description());
         this.reportRepository.save(report);
         return ResponseEntity.ok().body(report);
     }
-/*
-    @GetMapping("/GetReports/{managerId}")
-    public ResponseEntity<Object> getReports(@PathVariable long managerId){
-        if(this.managerService.getManagerById(managerId).getRole() != UserRole.MANAGER){
-            throw new IllegalArgumentException("The user is'n a MANAGER");
+
+    @GetMapping("/getReports/{userid}")
+    public ResponseEntity<Object> getContests(@PathVariable long userid) {
+        try {
+            return ResponseEntity.ok(this.reportsService.getReports(userid));
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
         }
-        return ResponseEntity.ok().body(this.reportRepository.findAll());
     }
 
-
-    @DeleteMapping("/DeleteReports/{managerId}/{reportsId}")
-    public ResponseEntity<Object> deleteReports(@PathVariable long managerId, @PathVariable long reportsId) {
-        Manager manager = this.managerService.getManagerById(managerId);
-        if (manager == null || manager.getRole() != UserRole.MANAGER) {
-            throw new IllegalArgumentException("Manager non valido");
-        }
-
-        Reports report = this.reportRepository.findById(reportsId);
-        if (report == null) {
-            throw new IllegalArgumentException("Report non trovato");
-        }
-
-
-        reportsService.deleteReport(reportsId);
-        return ResponseEntity.ok().body("Report eliminato con successo");
+    @DeleteMapping("/DeleteReport/{userId}")
+    public ResponseEntity<Object> deleteUser(@PathVariable long userId){
+        this.reportsService.deleteReport(userId);
+        return ResponseEntity.ok().body("Report deleted");
     }
-*/
+    /*
+
+    @PutMapping("/resolveReport/{userId}/{reportId}")
+    public ResponseEntity<Object> openContest(@PathVariable long userId, @PathVariable long contestId) {
+        try {
+            this.contestService.openContest(userId, contestId);
+            return ResponseEntity.ok("Contest opened successfully");
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }*/
 }

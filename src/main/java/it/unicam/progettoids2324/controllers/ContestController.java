@@ -33,10 +33,9 @@ public class ContestController {
 
     @PostMapping("/createContest/{userId}")
     public ResponseEntity<Object> createContest(@PathVariable long userId, @RequestBody CreateContestRequest request) {
-        // se si tratta dell'animatore
         try {
-            this.contestService.createContest(userId, request.name(), request.description(),
-                    request.start(), request.end(),request.win());
+            this.contestService.createContest(request.userId(), request.name(), request.description(),
+                    request.start(), request.end(),request.winnerId());
             return ResponseEntity.ok("Contest created successfully");
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
